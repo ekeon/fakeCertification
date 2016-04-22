@@ -10,9 +10,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.ZoomControls;
 
+import com.ekeon.fakecertification.fakeinsta.RecyclerActivity;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.io.File;
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
   private int width;
   private int height;
 
+  @Bind(R.id.main_camera_zoom) ZoomControls zoomControls;
   @Bind(R.id.layout_camera) FrameLayout layoutCamera;
   String filepath = "";
 
@@ -41,7 +45,14 @@ public class MainActivity extends AppCompatActivity {
     if (camera == null) {
       return;
     }
-    camera.takePicture(null, null, takePicture);
+    camera.autoFocus(new Camera.AutoFocusCallback() {
+      @Override
+      public void onAutoFocus(boolean success, Camera camera) {
+        if (success) {
+          camera.takePicture(null, null, takePicture);
+        }
+      }
+    });
   }
 
   @Override
@@ -53,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     camera = checkDeviceCamera();
     cameraSurfaceView = new CameraSurfaceView(this, camera);
+    cameraSurfaceView.cameraZoom(zoomControls);
     layoutCamera.addView(cameraSurfaceView);
 
     DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
@@ -84,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
           makeDir();
           Bitmap bitmap;
           bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-          // TODO: 2016. 4. 20. 이미지 넘기기.
 
           try {
             now = System.currentTimeMillis();

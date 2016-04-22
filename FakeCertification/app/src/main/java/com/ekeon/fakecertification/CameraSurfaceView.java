@@ -4,14 +4,19 @@ import android.content.Context;
 import android.hardware.Camera;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.ZoomControls;
 
 /**
  * Created by Ekeon on 2016. 4. 20..
  */
 public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 
-  SurfaceHolder surfaceHolder;
-  Camera camera;
+  private SurfaceHolder surfaceHolder;
+  private Camera camera;
+
+  private ZoomControls zoomControls;
+  private int currentZoomLevel = 0, maxZoomLevel = 0;
 
   public CameraSurfaceView(Context context, Camera camera) {
     super(context);
@@ -34,6 +39,33 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
   public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
     camera.setDisplayOrientation(90);
     camera.startPreview();
+
+    if(camera.getParameters().isZoomSupported()){
+      maxZoomLevel = camera.getParameters().getMaxZoom();
+
+      zoomControls.setIsZoomInEnabled(true);
+      zoomControls.setIsZoomOutEnabled(true);
+
+      zoomControls.setOnZoomInClickListener(new OnClickListener(){
+        public void onClick(View v){
+          if(currentZoomLevel < maxZoomLevel){
+            currentZoomLevel++;
+            camera.startSmoothZoom(currentZoomLevel);
+          }
+        }
+      });
+
+      zoomControls.setOnZoomOutClickListener(new OnClickListener(){
+        public void onClick(View v){
+          if(currentZoomLevel > 0){
+            currentZoomLevel--;
+            camera.startSmoothZoom(currentZoomLevel);
+          }
+        }
+      });
+    }
+    else
+      zoomControls.setVisibility(View.GONE);
   }
 
   @Override
@@ -41,6 +73,10 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     camera.stopPreview();
     camera.release();
     camera = null;
+  }
+
+  public void cameraZoom(ZoomControls zoomControls) {
+    this.zoomControls = zoomControls;
   }
 
   public void getCamera(Camera camera) {

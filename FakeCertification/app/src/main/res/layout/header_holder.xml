@@ -16,18 +16,17 @@
         android:id="@+id/iv_header_profile"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="12dp"
         app:roundAsCircle="true"
         app:roundedCornerRadius="16dp"
         app:fadeDuration="300"
         app:backgroundImage="@android:color/transparent"
-        app:roundingBorderColor="#000000"
-        app:roundingBorderWidth="1dp"
         />
 
       <TextView
-          android:text="LEEKEONWOO"
-          android:layout_marginLeft="13dp"
+          android:id="@+id/tv_header_nickname"
+          android:text="hahA_haha"
+          android:layout_marginLeft="12dp"
           android:layout_toRightOf="@id/iv_header_profile"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
