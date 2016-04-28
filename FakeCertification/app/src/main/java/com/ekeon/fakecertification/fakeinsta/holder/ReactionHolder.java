@@ -2,6 +2,7 @@ package com.ekeon.fakecertification.fakeinsta.holder;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -16,10 +17,10 @@ import butterknife.ButterKnife;
  */
 public class ReactionHolder extends RecyclerView.ViewHolder {
 
-  private static final int POSITION_FIST_REACTION = 3;
-  private static final int POSITION_FIRST_DUMMY_REACTION = 6;
-  private static final int POSITION_SECOND_DUMMY_REACTION = 9;
-  private static final int POSITION_THIRD_DUMMY_REACTION = 12;
+  private static final int POSITION_FIST_REACTION = 1;
+  private static final int POSITION_FIRST_DUMMY_REACTION = 3;
+  private static final int POSITION_SECOND_DUMMY_REACTION = 5;
+  private static final int POSITION_THIRD_DUMMY_REACTION = 7;
 
   @Bind(R.id.tv_reaction_nickname) TextView tvReactionNickname;
   @Bind(R.id.tv_content) TextView tvContent;
@@ -38,6 +39,7 @@ public class ReactionHolder extends RecyclerView.ViewHolder {
 
 
   public void setPosition(int position, String nickname, String content, String hashtag) {
+    Log.d("TAG","sadf" + position);
     switch (position) {
       case POSITION_FIST_REACTION:
         setText("" + nickname,"" + content,"" + hashtag);

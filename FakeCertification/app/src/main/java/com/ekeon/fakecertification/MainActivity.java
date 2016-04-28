@@ -45,14 +45,18 @@ public class MainActivity extends AppCompatActivity {
     if (camera == null) {
       return;
     }
-    camera.autoFocus(new Camera.AutoFocusCallback() {
-      @Override
-      public void onAutoFocus(boolean success, Camera camera) {
-        if (success) {
-          camera.takePicture(null, null, takePicture);
+    try {
+      camera.autoFocus(new Camera.AutoFocusCallback() {
+        @Override
+        public void onAutoFocus(boolean success, Camera camera) {
+          if (success) {
+            camera.takePicture(null, null, takePicture);
+          }
         }
-      }
-    });
+      });
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Override

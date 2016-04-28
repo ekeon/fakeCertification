@@ -1,18 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="#FFFFFF">
+
+  <android.support.design.widget.CoordinatorLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fitsSystemWindows="true"
+      >
+
+      <android.support.design.widget.AppBarLayout
+          android:layout_width="match_parent"
+          android:layout_height="50dp">
+
+          <android.support.v7.widget.Toolbar
+              android:id="@+id/appbar"
+              android:layout_height="?attr/actionBarSize"
+              android:layout_width="match_parent"
+              app:layout_scrollFlags="scroll|enterAlways"
+              android:background="#0A558A">
+
+            <RelativeLayout
+                android:id="@+id/rl_action_bar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+              <ImageView
+                  android:layout_width="103dp"
+                  android:layout_height="wrap_content"
+                  android:layout_centerVertical="true"
+                  android:src="@drawable/logo"/>
+
+              <ImageView
+                  android:layout_width="22dp"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentRight="true"
+                  android:layout_centerVertical="true"
+                  android:layout_marginRight="10dp"
+                  android:src="@drawable/icon_inbox"/>
+            </RelativeLayout>
+              </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
 
   <android.support.v7.widget.RecyclerView
       android:id="@+id/rv_main"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_marginBottom="56dp"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
       >
   </android.support.v7.widget.RecyclerView>
+  </android.support.design.widget.CoordinatorLayout>
 
   <LinearLayout
+      android:layout_alignParentBottom="true"
       android:layout_width="match_parent"
       android:layout_height="56dp"
       android:layout_gravity="bottom"
@@ -84,4 +128,4 @@
     </FrameLayout>
       </LinearLayout>
 
-</FrameLayout>
+</RelativeLayout>

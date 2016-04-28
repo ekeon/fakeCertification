@@ -22,9 +22,9 @@ import butterknife.ButterKnife;
 public class DummyImageHolder extends RecyclerView.ViewHolder {
 
   private static final int POSITION_FIRST_IMAGE = 2;
-  private static final int POSITION_FIRST_DUMMYIMAGE = 5;
-  private static final int POSITION_SECOND_DUMMYIMAGE = 8;
-  private static final int POSITION_THIRD_DUMMYIMAGE = 11;
+  private static final int POSITION_FIRST_DUMMYIMAGE = 2;
+  private static final int POSITION_SECOND_DUMMYIMAGE = 4;
+  private static final int POSITION_THIRD_DUMMYIMAGE = 6;
 
 
   @Bind(R.id.iv_dummy_image) SimpleDraweeView ivDummyImage;

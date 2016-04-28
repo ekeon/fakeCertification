@@ -37,6 +37,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 
   @Override
   public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+    camera.getParameters().setPreviewSize(480,320);
     camera.setDisplayOrientation(90);
     camera.startPreview();
 

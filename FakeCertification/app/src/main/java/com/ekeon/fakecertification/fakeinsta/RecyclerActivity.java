@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.ekeon.fakecertification.R;
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,6 +24,7 @@ import butterknife.ButterKnife;
 public class RecyclerActivity extends AppCompatActivity {
 
   @Bind(R.id.rv_main) RecyclerView rvMain;
+//  @Bind(R.id.rl_action_bar) RelativeLayout rlActionBar;
 
   RecyclerAdapter recyclerAdapter;
 
@@ -36,12 +40,20 @@ public class RecyclerActivity extends AppCompatActivity {
     setContentView(R.layout.recycler_main);
     ButterKnife.bind(this);
 
-    recyclerAdapter = new RecyclerAdapter();
     String filepath = getIntent().getStringExtra("filepath");
-    recyclerAdapter.setFilePath(filepath);
 
-    rvMain.setLayoutManager(new LinearLayoutManager(this));
+    recyclerAdapter = new RecyclerAdapter();
+    recyclerAdapter.setFilePath(filepath);
     rvMain.setAdapter(recyclerAdapter);
+    rvMain.setLayoutManager(new LinearLayoutManager(this));
+    rvMain.addItemDecoration(new StickyRecyclerHeadersDecoration(recyclerAdapter));
+
+    rvMain.addOnScrollListener(new RecyclerView.OnScrollListener() {
+      @Override
+      public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        super.onScrolled(recyclerView, dx, dy);
+      }
+    });
 
     dialog = createDialog();
     dialog.show();
